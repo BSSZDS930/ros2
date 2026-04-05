@@ -3,7 +3,7 @@
 
 int main(int argc,char *argv[])
 {
-    rclcpp::init(argc,argv);
+    rclcpp::init(argc, argv);
 	
 	auto node = std:make_shared<rclcpp::Node>("publisher_node");
 	
@@ -18,7 +18,9 @@ int main(int argc,char *argv[])
 		publisher->publish(message);
 		loop_rate.sleep();
 	}
+
 	rclcpp::shutdown();
+
     return 0;
 }
 
