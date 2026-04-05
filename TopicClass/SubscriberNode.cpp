@@ -1,0 +1,35 @@
+#include "rclcpp/rclcpp.hpp"
+#include "std_msgs/msg/string.hpp"
+
+Class SubscriberNode:public rclcpp::Node
+{
+    public:
+        public SubscriberNode():Node("subcriber_node")
+        {
+            subscriber_ = create_subscription<std_msgs::msg::String>(
+                        "/my_topic",
+                        10,
+                        std::bind(&SubscriberNode::Callback, this, std::placeholders::_1)
+                        );
+        }
+
+    private:
+        void Callback(const std_msgs::msg::String::SharedPtr msg)
+        {
+            RCLCPP_INFO(get_logger(), "Receive:%s", msg->data.c_str());
+        }
+
+        rclcpp::Subscription<std_msgs::msg::String>::SharedPtr subscriber_;
+}
+
+int main(int argc,char *argv[])
+{
+    rclcpp::init(argc, argv);
+
+	auto node = std:make_shared<SubscriberNode>();
+
+	rclcpp::spin(node);
+	rclcpp::shutdown();
+
+	return 0;
+}
