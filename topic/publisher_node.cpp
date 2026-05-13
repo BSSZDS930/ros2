@@ -7,7 +7,7 @@ int main(int argc,char *argv[])
 	
 	auto node = std:make_shared<rclcpp::Node>("publisher_node");
 
-	// 创建一个发布者对象，参数：(发布的话题，发送缓冲的队列大小）
+	// 创建一个发布者对象，话题发布消息类型，参数：(发布的话题，发送缓冲的队列大小）
 	auto publisher = node->create_publisher<std_msgs::msg::String>("/my_topic", 10);
 	
 	std_msgs::msg::String message;
